@@ -5,6 +5,7 @@ Instruction:
 3. npm install
 4. node server.js
 5. cd frontend
+5.5 npm install
 6. npm start
 
 Login Info: 
