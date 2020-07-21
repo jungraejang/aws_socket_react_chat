@@ -14,7 +14,7 @@ export default class Chat extends React.Component {
   }
 
   initiateConnection = () => {
-    this.socket = io.connect("127.0.0.1");
+    this.socket = io.connect("http://54.161.12.72:8080");
   };
 
   initiateMessageListener = () => {

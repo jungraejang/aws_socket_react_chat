@@ -44,7 +44,7 @@ const getTranslation = async msg => {
 io.on("connection", async socket => {
   console.log("a user connected", socket.id);
 
-  io.emit("newly joined", {message: socket.id + "has joined the chat"});
+  io.emit("newly joined", { message: socket.id + "has joined the chat" });
 
   socket.broadcast.emit("hi!");
 
@@ -56,7 +56,7 @@ io.on("connection", async socket => {
     console.log("translatedText", translatedText);
     //socket emits translated message back
     await io.emit("chat message", {
-      message: {message: translatedText, nickName: msg.nickName},
+      message: { message: translatedText, nickName: msg.nickName },
       id: socket.id
     });
   });
@@ -66,6 +66,6 @@ io.on("connection", async socket => {
   });
 });
 
-http.listen(8080, "127.0.0.1", () => {
+http.listen(8080, () => {
   console.log("listening to port 8080");
 });
