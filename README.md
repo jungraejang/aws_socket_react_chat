@@ -5,8 +5,8 @@ Instruction:
 3. npm install
 4. node server.js
 5. cd frontend
-5.5 npm install
-6. npm start
+6. npm install
+7. npm start
 
 Login Info: 
 1. test@gmail.com - 12345678
