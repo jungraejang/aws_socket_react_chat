@@ -13,7 +13,9 @@ export default class NicknameInput extends React.Component {
   constructor() {
     super();
     this.state = {
-      nickName: ""
+      nickName: "",
+      targetLanguageCode: "en",
+      userLanguageCode: "en"
     };
   }
 
@@ -23,9 +25,25 @@ export default class NicknameInput extends React.Component {
     });
   };
 
-  componentDidMount() {}
+  handleUserLanguageChange = event => {
+    this.setState({
+      userLanguageCode: event.target.value
+    });
+  };
+
+  handleTargetLanguageChange = event => {
+    this.setState({
+      targetLanguageCode: event.target.value
+    });
+  };
+
+  componentDidMount() {
+    console.log("nickname selection");
+    console.log("language list", this.props);
+  }
 
   render() {
+    console.log("nickname state", this.state);
     return (
       <div
         style={{
@@ -50,7 +68,11 @@ export default class NicknameInput extends React.Component {
         >
           <form
             onSubmit={() => {
-              this.props.getNickName(this.state.nickName);
+              this.props.getNickName(
+                this.state.nickName,
+                this.state.userLanguageCode,
+                this.state.targetLanguageCode
+              );
             }}
             style={{
               display: "flex",
@@ -79,6 +101,36 @@ export default class NicknameInput extends React.Component {
             >
               Join the chat
             </Button>
+          </form>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Translate from:
+              <select
+                value={this.state.value}
+                onChange={this.handleUserLanguageChange}
+              >
+                <option value="en">English</option>
+                <option value="fr">Francais</option>
+                <option value="ar">Arabic</option>
+                <option value="ko">한국어</option>
+                <option value="pt">Portuguese</option>
+              </select>
+            </label>
+          </form>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Translate to:
+              <select
+                value={this.state.value}
+                onChange={this.handleTargetLanguageChange}
+              >
+                <option value="en">English</option>
+                <option value="fr">Francais</option>
+                <option value="ar">Arabic</option>
+                <option value="ko">한국어</option>
+                <option value="pt">Portuguese</option>
+              </select>
+            </label>
           </form>
         </Paper>
       </div>

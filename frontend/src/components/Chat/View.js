@@ -15,7 +15,6 @@ export default function Chat(props) {
   };
 
   useEffect(scrollToBottom);
-
   return (
     <>
       <CssBaseline />

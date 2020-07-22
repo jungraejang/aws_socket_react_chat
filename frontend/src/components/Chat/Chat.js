@@ -19,6 +19,7 @@ export default class Chat extends React.Component {
 
   initiateMessageListener = () => {
     this.socket.on("chat message", msg => {
+      console.log("msg msg", msg);
       this.setState({
         messages: [...this.state.messages, msg.message]
       });
@@ -41,7 +42,12 @@ export default class Chat extends React.Component {
 
   sendMessage = (event, message) => {
     event.preventDefault();
-    let messageData = { message: message, nickName: this.props.nickName };
+    let messageData = {
+      message: message,
+      nickName: this.props.nickName,
+      sourceLanguageCode: this.props.userLanguageCode,
+      targetLanguageCode: this.props.targetLanguageCode
+    };
     this.socket.emit("chat message", messageData);
     this.setState({
       message: ""
@@ -55,6 +61,8 @@ export default class Chat extends React.Component {
   }
 
   render() {
+    console.log("chat props", this.props);
+    console.log("chat state", this.state);
     return (
       <div>
         <h1>Welcome to RatChat. Chat app for Ratchet ppl</h1>
@@ -66,6 +74,7 @@ export default class Chat extends React.Component {
           handleChange={this.handleChange}
           sendMessage={this.sendMessage}
           nickName={this.props.nickName}
+          systemMessage={this.state.systemMessage}
         />
       </div>
     );
