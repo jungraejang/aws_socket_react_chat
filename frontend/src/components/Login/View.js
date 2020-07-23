@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: "purple"
+    backgroundColor: "#003A72"
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    backgroundColor: "purple",
+    backgroundColor: "#003A72",
     color: "white"
   }
 }));
@@ -69,7 +69,7 @@ export default function SignIn(props) {
             autoComplete="email"
             autoFocus
             InputLabelProps={{
-              style: { color: "purple" }
+              style: { color: "#003A72" }
             }}
             value={props.email}
             onChange={props.handleChange}
@@ -84,7 +84,7 @@ export default function SignIn(props) {
             type="password"
             id="password"
             InputLabelProps={{
-              style: { color: "purple" }
+              style: { color: "#003A72" }
             }}
             autoComplete="current-password"
             value={props.password}
@@ -100,7 +100,7 @@ export default function SignIn(props) {
             type="nickName"
             id="nickName"
             InputLabelProps={{
-              style: { color: "purple" }
+              style: { color: "#003A72" }
             }}
             autoComplete="current-nickName"
             value={props.nickName}
@@ -114,7 +114,7 @@ export default function SignIn(props) {
             type="submit"
             fullWidth
             variant="contained"
-            color="purple"
+            color="#4150c1"
             className={classes.submit}
           >
             Sign In
