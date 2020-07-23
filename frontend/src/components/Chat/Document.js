@@ -26,7 +26,7 @@ class Document extends React.Component{
             }
         };
         console.log('we made it this far');
-        axios.post('54.161.12.72:8080',formData,config)
+        axios.post('http://localhost:8080',formData,config)
             .then((response) => {
                 alert("The file is successfully uploaded");
             }).catch((error) => {
