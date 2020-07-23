@@ -71,7 +71,7 @@ export default class NicknameInput extends React.Component {
             <Button
               variant="contained"
               style={{
-                backgroundColor: "purple",
+                backgroundColor: "blue",
                 marginTop: "10%",
                 color: "white"
               }}

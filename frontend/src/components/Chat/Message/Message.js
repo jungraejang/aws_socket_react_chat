@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
   ownMessage: {
     display: "flex",
     marginTop: "10px",
-    backgroundColor: "purple",
+    backgroundColor: "mediumblue",
     color: "white",
     textAlign: "left",
     minHeight: "10%",
