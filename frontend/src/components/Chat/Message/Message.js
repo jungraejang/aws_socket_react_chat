@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
   ownMessage: {
     display: "flex",
     marginTop: "10px",
-    backgroundColor: "purple",
+    backgroundColor: "mediumblue",
     color: "white",
     textAlign: "left",
     minHeight: "10%",
@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
   },
   otherMessage: {
     marginTop: "10px",
+    //wow! even more hacks
     backgroundColor: "skyblue",
     color: "white",
     textAlign: "right",

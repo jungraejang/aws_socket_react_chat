@@ -1,6 +1,7 @@
 import React from "react";
 import io from "socket.io-client";
 import View from "./View.js";
+import Banner from "./citi_banner.png"
 export default class Chat extends React.Component {
   constructor(props) {
     super(props);
@@ -65,7 +66,10 @@ export default class Chat extends React.Component {
     console.log("chat state", this.state);
     return (
       <div>
-        <h1>Welcome to RatChat. Chat app for Ratchet ppl</h1>
+	//hacks
+        <img src={Banner} alt="citi banner" width = "120" height = "78"/>
+        <h1>Welcome to CitiLingo!</h1>
+        <h2>Breaking down language barriers faced by Citi clients, one chat at a time.</h2>
         <p id="nickName">Welcome Nickname: {this.props.nickName}</p>
         <button onClick={this.props.logout}>Log out!</button>
         <View
