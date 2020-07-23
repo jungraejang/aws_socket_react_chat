@@ -1,7 +1,9 @@
 import React from "react";
 import io from "socket.io-client";
 import View from "./View.js";
+import Document from './Document';
 import Banner from "./citi_banner.png"
+
 export default class Chat extends React.Component {
   constructor(props) {
     super(props);
@@ -80,6 +82,7 @@ export default class Chat extends React.Component {
           nickName={this.props.nickName}
           systemMessage={this.state.systemMessage}
         />
+        <Document />
       </div>
     );
   }
