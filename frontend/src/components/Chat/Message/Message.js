@@ -41,7 +41,9 @@ export default function Message(props) {
       <Typography>
         {props.message.nickName} said:
         <br />
-        {props.message.message}
+        {props.nickName === props.message.nickName
+          ? props.message.originalMessage
+          : props.message.translatedMessage}
       </Typography>
     </Paper>
   );
