@@ -58,22 +58,17 @@ app.post("/", upload.single('myImage'), async (req, res, err) => {
           if (data) {
             console.log('we got data: ' + data)
             fs.unlinkSync(req.file.path); // Empty temp folder4
-            const locationUrl = data.Location;
-            let newUser = new Users({ ...req.body, avatar: locationUrl });
-            newUser
-              .save()
-              .then(user => {
-                res.json({ message: 'Data saved', data });
-              })
-              .catch(err => {
-                console.log('Error occured while trying to save to DB');
-              });
           }
       });
 
   
       let textract = new aws.Textract();
-      var params = { Document: req.file};
+      var params = { Document: {
+        S3Object: {
+          Bucket:'sprint2-help',
+          Name: 'download'
+        }
+      }};
       await textract.detectDocumentText(params, function(err, data){
         console.log('data:' + data);
         console.log('err' + err);
