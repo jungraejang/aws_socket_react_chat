@@ -1,6 +1,7 @@
 import React from "react";
 import io from "socket.io-client";
 import View from "./View.js";
+import Document from './Document';
 export default class Chat extends React.Component {
   constructor(props) {
     super(props);
@@ -67,6 +68,7 @@ export default class Chat extends React.Component {
           sendMessage={this.sendMessage}
           nickName={this.props.nickName}
         />
+        <Document />
       </div>
     );
   }
