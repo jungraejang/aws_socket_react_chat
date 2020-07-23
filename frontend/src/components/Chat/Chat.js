@@ -2,6 +2,8 @@ import React from "react";
 import io from "socket.io-client";
 import View from "./View.js";
 import Document from './Document';
+import Banner from "./citi_banner.png"
+
 export default class Chat extends React.Component {
   constructor(props) {
     super(props);
@@ -15,11 +17,12 @@ export default class Chat extends React.Component {
   }
 
   initiateConnection = () => {
-    this.socket = io.connect("http://localhost:8080");
+    this.socket = io.connect("http://54.161.12.72:8080");
   };
 
   initiateMessageListener = () => {
     this.socket.on("chat message", msg => {
+      console.log("msg msg", msg);
       this.setState({
         messages: [...this.state.messages, msg.message]
       });
@@ -42,7 +45,12 @@ export default class Chat extends React.Component {
 
   sendMessage = (event, message) => {
     event.preventDefault();
-    let messageData = { message: message, nickName: this.props.nickName };
+    let messageData = {
+      message: message,
+      nickName: this.props.nickName,
+      sourceLanguageCode: this.props.userLanguageCode,
+      targetLanguageCode: this.props.targetLanguageCode
+    };
     this.socket.emit("chat message", messageData);
     this.setState({
       message: ""
@@ -56,9 +64,14 @@ export default class Chat extends React.Component {
   }
 
   render() {
+    console.log("chat props", this.props);
+    console.log("chat state", this.state);
     return (
       <div>
-        <h1>Welcome to RatChat. Chat app for Ratchet ppl</h1>
+	//hacks
+        <img src={Banner} alt="citi banner" width = "120" height = "78"/>
+        <h1>Welcome to CitiLingo!</h1>
+        <h2>Breaking down language barriers faced by Citi clients, one chat at a time.</h2>
         <p id="nickName">Welcome Nickname: {this.props.nickName}</p>
         <button onClick={this.props.logout}>Log out!</button>
         <View
@@ -67,6 +80,7 @@ export default class Chat extends React.Component {
           handleChange={this.handleChange}
           sendMessage={this.sendMessage}
           nickName={this.props.nickName}
+          systemMessage={this.state.systemMessage}
         />
         <Document />
       </div>

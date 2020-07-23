@@ -98,9 +98,9 @@ app.get("/", (req, res) => {
 
 const getTranslation = async msg => {
   const params = {
-    Text: msg,
-    SourceLanguageCode: "en",
-    TargetLanguageCode: "es"
+    Text: msg.message,
+    SourceLanguageCode: msg.sourceLanguageCode,
+    TargetLanguageCode: msg.targetLanguageCode
   };
 
   const tranlatedMsg = await translateService
@@ -122,12 +122,16 @@ io.on("connection", async socket => {
   socket.on("chat message", async msg => {
     console.log("message: ", msg);
     //insert code block for translation
-    const translatedMsg = await getTranslation(msg.message);
+    const translatedMsg = await getTranslation(msg);
     translatedText = translatedMsg.TranslatedText;
     console.log("translatedText", translatedText);
     //socket emits translated message back
     await io.emit("chat message", {
-      message: { message: translatedText, nickName: msg.nickName },
+      message: {
+        translatedMessage: translatedText,
+        nickName: msg.nickName,
+        originalMessage: msg.message
+      },
       id: socket.id
     });
   });

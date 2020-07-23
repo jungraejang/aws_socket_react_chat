@@ -15,13 +15,13 @@ export default function Chat(props) {
   };
 
   useEffect(scrollToBottom);
-
   return (
     <>
       <CssBaseline />
       <div
         style={{
-          height: "60vh",
+	//more hacks
+          height: "50vh",
           overflow: "scroll"
         }}
       >

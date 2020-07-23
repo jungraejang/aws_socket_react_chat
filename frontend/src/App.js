@@ -18,12 +18,29 @@ class App extends React.Component {
       messages: [],
       user: null,
       loaded: false,
-      nickName: null
+      nickName: null,
+      userLanguageCode: "en",
+      targetLanguageCode: "en",
+      languageList: {
+        Arabic: "ar",
+        Chinese: "zh",
+        Dutch: "nl",
+        English: "en",
+        French: "fr",
+        German: "de",
+        Hindi: "hi",
+        Italian: "it",
+        Japanese: "ja",
+        Korean: "ko",
+        Portuguese: "pt",
+        Russian: "ru",
+        Spanish: "es"
+      }
     };
   }
 
   initiateConnection = () => {
-    this.socket = io.connect("http://localhost:8080");
+    this.socket = io.connect("http://54.161.12.72:8080");
   };
 
   initiateMessageListener = () => {
@@ -65,9 +82,23 @@ class App extends React.Component {
     });
   };
 
-  getNickName = nickName => {
+  getNickName = (nickName, userLanguageCode, targetLanguageCode) => {
     this.setState({
-      nickName: nickName
+      nickName: nickName,
+      userLanguageCode: userLanguageCode,
+      targetLanguageCode: targetLanguageCode
+    });
+  };
+
+  getUserLanguageCode = userLanguageCode => {
+    this.setState({
+      userLanguageCode: userLanguageCode
+    });
+  };
+
+  getTargetLanguageCode = targetLanguageCode => {
+    this.setState({
+      targetLanguageCode: targetLanguageCode
     });
   };
 
@@ -87,7 +118,14 @@ class App extends React.Component {
 
   displayLogin = () => {
     if (this.state.user && this.state.nickName) {
-      return <Chat nickName={this.state.nickName} logout={this.logout} />;
+      return (
+        <Chat
+          nickName={this.state.nickName}
+          logout={this.logout}
+          userLanguageCode={this.state.userLanguageCode}
+          targetLanguageCode={this.state.targetLanguageCode}
+        />
+      );
     } else if (!this.state.loaded) {
       return (
         <>
@@ -111,7 +149,14 @@ class App extends React.Component {
     } else if (!this.state.nickName) {
       return (
         <>
-          <NicknameInput getNickName={this.getNickName} />
+          <NicknameInput
+            getNickName={this.getNickName}
+            languageList={this.state.languageList}
+            userLanguageCode={this.state.userLanguageCode}
+            targetLanguageCode={this.state.targetLanguageCode}
+            getUserLanguageCode={this.getUserLanguageCode}
+            getTargetLanguageCode={this.getTargetLanguageCode}
+          />
         </>
       );
     }
