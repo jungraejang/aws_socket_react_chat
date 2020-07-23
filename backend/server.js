@@ -35,6 +35,7 @@ app.use(express.static(__dirname));
 // app.use('/textract', textractRoute);
 
 app.post("/", upload.single('myImage'), async (req, res, err) => {
+  try{
       console.log("Request ---", req.body);
       console.log("Request file ---", req.file);
       console.log('bucket' + process.env.BUCKET_NAME);
@@ -63,21 +64,23 @@ app.post("/", upload.single('myImage'), async (req, res, err) => {
 
   
       let textract = new aws.Textract();
-      var params = { Document: {
-        S3Object: {
-          Bucket:'sprint2-help',
-          Name: 'download'
-        }
-      }};
+      var params = { "S3Object":{"Bucket":"sprint2-documents","Name":"w-2.png"}
+      };
       await textract.detectDocumentText(params, function(err, data){
         console.log('data:' + data);
         console.log('err' + err);
+      }).then(data => {
+        console.log(data);
       })
       res.send(req.file)
       if(err){
         console.log(err);
          return res.send(200).end();
       }
+    }
+    catch(err){
+      console.log(err);
+    }
 });
 
 app.get("/", (req, res) => {
