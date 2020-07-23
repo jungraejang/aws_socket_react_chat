@@ -26,7 +26,9 @@ class Document extends React.Component{
             }
         };
         console.log('we made it this far');
+
         axios.post('http://localhost:8080',formData,config)
+
             .then((response) => {
                 alert("The file is successfully uploaded");
             }).catch((error) => {
