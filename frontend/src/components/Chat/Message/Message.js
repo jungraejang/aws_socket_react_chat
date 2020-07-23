@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
   },
   otherMessage: {
     marginTop: "10px",
+    //wow! even more hacks
     backgroundColor: "skyblue",
     color: "white",
     textAlign: "right",

@@ -58,6 +58,7 @@ export default class Chat extends React.Component {
   render() {
     return (
       <div>
+	//hacks
         <img src={Banner} alt="citi banner" width = "120" height = "78"/>
         <h1>Welcome to CitiLingo!</h1>
         <h2>Breaking down language barriers faced by Citi clients, one chat at a time.</h2>

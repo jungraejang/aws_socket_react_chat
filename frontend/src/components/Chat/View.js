@@ -21,6 +21,7 @@ export default function Chat(props) {
       <CssBaseline />
       <div
         style={{
+	//more hacks
           height: "50vh",
           overflow: "scroll"
         }}
