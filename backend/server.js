@@ -4,12 +4,16 @@ const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const aws = require("aws-sdk");
 const fs = require('fs');
+const bodyParser = require('body-parser');
 const multer = require('multer');
 const textractRoute= require('./textractRoute');
 require("dotenv").config();
 console.log("aws region", process.env.AWS_REGION);
 const cors = require('cors');
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -64,13 +68,26 @@ app.post("/", upload.single('myImage'), async (req, res, err) => {
 
   
       let textract = new aws.Textract();
+
+      var params = { Document: {
+        S3Object: {
+          Bucket:'sprint2-help',
+          Name: 'w-2.png'
+        }
+      }};
+
       var params = { "S3Object":{"Bucket":"sprint2-documents","Name":"w-2.png"}
       };
+
       await textract.detectDocumentText(params, function(err, data){
-        console.log('data:' + data);
+        console.log('data:' + JSON.stringify(data));
         console.log('err' + err);
+
+        console.log('parseData:' +  JSON.parse(data));
+
       }).then(data => {
         console.log(data);
+
       })
       res.send(req.file)
       if(err){
