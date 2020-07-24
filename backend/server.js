@@ -74,15 +74,28 @@ app.post("/", upload.single('myImage'), async (req, res, err) => {
         }
       }};
       await textract.detectDocumentText(params, function(err, data){
-        console.log('data:' + JSON.stringify(data));
         console.log('err' + err);
-        console.log('parseData:' +  JSON.parse(data));
+        let blocks = data.Blocks;
+        let allText = [];
+        for(let i = 0; i < blocks.length; i++){
+          if(blocks[i].Text){
+            allText.push(blocks[i].Text);
+          }
+        }
+        console.log('allText'+ allText);
+
+        let request = '';
+        for(let i = 0; i < allText.length; i++){
+            request += allText[i];
+        }
+        let fullRequest = {message: request, sourceLanguageCode: 'en', targetLanguageCode: 'pt'};
+
+        let translatedshit = getTranslation(fullRequest).then(response => {
+          console.log('Response '+ JSON.stringify(response));
+          console.log('Translated ' + translatedshit);
+          res.status(200).json(response);
+        }); 
       })
-      res.send(req.file)
-      if(err){
-        console.log(err);
-         return res.send(200).end();
-      }
 });
 
 app.get("/", (req, res) => {
