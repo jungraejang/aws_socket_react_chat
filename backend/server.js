@@ -39,7 +39,6 @@ app.use(express.static(__dirname));
 // app.use('/textract', textractRoute);
 
 app.post("/", upload.single('myImage'), async (req, res, err) => {
-  try{
       console.log("Request ---", req.body);
       console.log("Request file ---", req.file);
       console.log('bucket' + process.env.BUCKET_NAME);
