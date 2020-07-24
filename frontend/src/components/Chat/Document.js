@@ -27,10 +27,11 @@ class Document extends React.Component{
         };
         console.log('we made it this far');
 
-        axios.post('http://localhost:8080',formData,config)
+        axios.post('http://54.161.12.72:8080',formData,config)
+            .then((translatedResponse) => {
+            	console.log('it worked ' + translatedResponse);
+                alert(JSON.stringify(translatedResponse));
 
-            .then((response) => {
-                alert("The file is successfully uploaded");
             }).catch((error) => {
             	alert('At leas')
         });
