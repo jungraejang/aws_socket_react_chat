@@ -34,27 +34,27 @@ class App extends React.Component {
         Korean: "ko",
         Portuguese: "pt",
         Russian: "ru",
-        Spanish: "es"
-      }
+        Spanish: "es",
+      },
     };
   }
 
   initiateConnection = () => {
-    this.socket = io.connect("http://54.161.12.72:8080");
+    this.socket = io.connect("http://192.168.0.101:8080");
   };
 
   initiateMessageListener = () => {
-    this.socket.on("chat message", msg => {
+    this.socket.on("chat message", (msg) => {
       this.setState({
-        messages: [...this.state.messages, msg.message]
+        messages: [...this.state.messages, msg.message],
       });
     });
   };
 
   initiateNewJoinListener = () => {
-    this.socket.on("newly joined", data => {
+    this.socket.on("newly joined", (data) => {
       this.setState({
-        systemMessage: data.message
+        systemMessage: data.message,
       });
     });
   };
@@ -64,18 +64,18 @@ class App extends React.Component {
   };
 
   authListener = () => {
-    fire.auth().onAuthStateChanged(user => {
+    fire.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({
           user: user,
-          loaded: true
+          loaded: true,
         });
         // this.getUserInfo(user);
         localStorage.setItem("user", user.uid);
       } else {
         this.setState({
           user: null,
-          loaded: true
+          loaded: true,
         });
         localStorage.removeItem("user");
       }
@@ -86,26 +86,26 @@ class App extends React.Component {
     this.setState({
       nickName: nickName,
       userLanguageCode: userLanguageCode,
-      targetLanguageCode: targetLanguageCode
+      targetLanguageCode: targetLanguageCode,
     });
   };
 
-  getUserLanguageCode = userLanguageCode => {
+  getUserLanguageCode = (userLanguageCode) => {
     this.setState({
-      userLanguageCode: userLanguageCode
+      userLanguageCode: userLanguageCode,
     });
   };
 
-  getTargetLanguageCode = targetLanguageCode => {
+  getTargetLanguageCode = (targetLanguageCode) => {
     this.setState({
-      targetLanguageCode: targetLanguageCode
+      targetLanguageCode: targetLanguageCode,
     });
   };
 
-  getUserInfo = user => {
+  getUserInfo = (user) => {
     this.setState({
       user: user,
-      loaded: true
+      loaded: true,
     });
   };
 

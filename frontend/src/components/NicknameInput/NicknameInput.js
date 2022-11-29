@@ -15,25 +15,25 @@ export default class NicknameInput extends React.Component {
     this.state = {
       nickName: "",
       targetLanguageCode: "en",
-      userLanguageCode: "en"
+      userLanguageCode: "en",
     };
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
-  handleUserLanguageChange = event => {
+  handleUserLanguageChange = (event) => {
     this.setState({
-      userLanguageCode: event.target.value
+      userLanguageCode: event.target.value,
     });
   };
 
-  handleTargetLanguageChange = event => {
+  handleTargetLanguageChange = (event) => {
     this.setState({
-      targetLanguageCode: event.target.value
+      targetLanguageCode: event.target.value,
     });
   };
 
@@ -54,10 +54,10 @@ export default class NicknameInput extends React.Component {
           height: "100vh",
           // width: null,
           // height: null,
-          backgroundImage: `url(${backgroundImg})`,
+          // backgroundImage: `url(${backgroundImg})`,
           // flex: 1,
           // resizeMode: 'cover',
-          backgroundRepeat: "no-repeat"
+          backgroundRepeat: "no-repeat",
         }}
       >
         <Paper
@@ -69,7 +69,7 @@ export default class NicknameInput extends React.Component {
             height: "50%",
             marginBottom: "10%",
             // backgroundImage: `url(${nicknameImage})`,
-            backgroundColor: 'rgba(0, 58, 114, 0.3)'
+            backgroundColor: "rgba(0, 58, 114, 0.3)",
             // backgroundRepeat: "no-repeat"
           }}
         >
@@ -95,15 +95,16 @@ export default class NicknameInput extends React.Component {
               label="Nickname"
               value={this.state.nickName}
               onChange={this.handleChange}
-              style={{ 
-                width: "70%"}}
+              style={{
+                width: "70%",
+              }}
             />
             <Button
               variant="contained"
               style={{
                 backgroundColor: "blue",
                 marginTop: "10%",
-                color: "white"
+                color: "white",
               }}
               type="submit"
             >

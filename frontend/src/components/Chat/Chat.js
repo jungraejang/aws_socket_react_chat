@@ -1,8 +1,8 @@
 import React from "react";
 import io from "socket.io-client";
 import View from "./View.js";
-import Document from './Document';
-import Banner from "./citi_banner.png"
+import Document from "./Document";
+import Banner from "./citi_banner.png";
 
 export default class Chat extends React.Component {
   constructor(props) {
@@ -12,33 +12,33 @@ export default class Chat extends React.Component {
       messages: [],
       systemMessage: "",
       userName: "",
-      message: ""
+      message: "",
     };
   }
 
   initiateConnection = () => {
-    this.socket = io.connect("http://54.161.12.72:8080");
+    this.socket = io.connect("http://192.168.0.101:8080");
   };
 
   initiateMessageListener = () => {
-    this.socket.on("chat message", msg => {
+    this.socket.on("chat message", (msg) => {
       console.log("msg msg", msg);
       this.setState({
-        messages: [...this.state.messages, msg.message]
+        messages: [...this.state.messages, msg.message],
       });
     });
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
   initiateNewJoinListener = () => {
-    this.socket.on("newly joined", data => {
+    this.socket.on("newly joined", (data) => {
       this.setState({
-        systemMessage: data.message
+        systemMessage: data.message,
       });
     });
   };
@@ -49,11 +49,11 @@ export default class Chat extends React.Component {
       message: message,
       nickName: this.props.nickName,
       sourceLanguageCode: this.props.userLanguageCode,
-      targetLanguageCode: this.props.targetLanguageCode
+      targetLanguageCode: this.props.targetLanguageCode,
     };
     this.socket.emit("chat message", messageData);
     this.setState({
-      message: ""
+      message: "",
     });
   };
 
@@ -68,10 +68,13 @@ export default class Chat extends React.Component {
     console.log("chat state", this.state);
     return (
       <div>
-	//hacks
-        <img src={Banner} alt="citi banner" width = "120" height = "78"/>
+        //hacks
+        <img src={Banner} alt="citi banner" width="120" height="78" />
         <h1>Welcome to CitiLingo!</h1>
-        <h2>Breaking down language barriers faced by Citi clients, one chat at a time.</h2>
+        <h2>
+          Breaking down language barriers faced by Citi clients, one chat at a
+          time.
+        </h2>
         <p id="nickName">Welcome Nickname: {this.props.nickName}</p>
         <button onClick={this.props.logout}>Log out!</button>
         <View
