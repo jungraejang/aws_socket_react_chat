@@ -1,4 +1,4 @@
-## aws_socket_react_chat
+## aws_socket_react_chat (Hackathon Project)
 
 ## Requirements
 
